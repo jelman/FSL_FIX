@@ -5,7 +5,7 @@ FIXVERSION=1.06
 # Get the OS and CPU type
 FSL_FIX_OS=`uname -s`
 FSL_FIX_ARCH=`uname -m`
-
+FSL_FIXDIR=/home/jagust/jelman/CODE/fix1.06
 if [ -z "${FSL_FIXDIR}" ]; then
 	FSL_FIXDIR=$( cd $(dirname $0) ; pwd)
 	export FSL_FIXDIR
@@ -17,7 +17,7 @@ fi
 # =======================
 # Point this variable at your MATLAB install folder
 if [ -z "${FSL_FIX_MATLAB_ROOT}" ]; then
-       FSL_FIX_MATLAB_ROOT=/usr/local/matlab
+       FSL_FIX_MATLAB_ROOT=/usr/local/matlab-2012b
        # On OS X this will most likely be something like /Applications/MATLAB_R20XX.app
 fi
 # On OS X this will most likely be something like /Applications/MATLAB_R20XX.app
