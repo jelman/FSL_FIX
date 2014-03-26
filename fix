@@ -8,8 +8,8 @@
 #
 #   SHCOPYRIGHT
 
-FSL_FIXDIR=$( cd $(dirname $0) ; pwd)
-export FSL_FIXDIR
+#FSL_FIXDIR=$( cd $(dirname $0) ; pwd)
+#export FSL_FIXDIR
 # All fix settings are held in the settings.sh file - edit this file to suit your setup
 . ${FSL_FIXDIR}/settings.sh
 
@@ -207,9 +207,9 @@ case $fix_mode in
       for f in $MELOUT ; do
         echo leaving-out: $f
         loof=`echo $MELOUT | awk '{$'$j'=""; print $0}'`
-        jid=`fsl_sub -q short.q -l $LOO/$j ${FSL_FIXDIR}/fix -t $LOO/$j/$bLOO $loof`
+        jid=`fsl_sub -l $LOO/$j ${FSL_FIXDIR}/fix -t $LOO/$j/$bLOO $loof`
         for d in 1 2 5 10 20 30 40 50 ; do
-          jidd=`fsl_sub -j $jid -q short.q -l $LOO/${j}_$d ${FSL_FIXDIR}/fix -c $f $LOO/$j/${bLOO}.RData $d`
+          jidd=`fsl_sub -j $jid -l $LOO/${j}_$d ${FSL_FIXDIR}/fix -c $f $LOO/$j/${bLOO}.RData $d`
           if [ "$jids" = "" ] ; then
             jids="-j $jidd"
           else
@@ -218,7 +218,7 @@ case $fix_mode in
         done
         j=`echo "$j 1 + p" | dc -`
       done
-      jidf=`fsl_sub $jids -q short.q -l $LOO ${FSL_FIXDIR}/call_matlab.sh -f fix_2c_loo_results $LOO`
+      jidf=`fsl_sub $jids -l $LOO ${FSL_FIXDIR}/call_matlab.sh -f fix_2c_loo_results $LOO`
     fi
     ;;
 
@@ -233,7 +233,7 @@ case $fix_mode in
         echo testing: $f
         CheckFeatures $f
         for d in 1 2 5 10 20 30 40 50 ; do
-          jidd=`fsl_sub -q short.q -l $LOO/${j}_$d ${FSL_FIXDIR}/fix -c $f $TRAIN $d`
+          jidd=`fsl_sub -l $LOO/${j}_$d ${FSL_FIXDIR}/fix -c $f $TRAIN $d`
           if [ "$jids" = "" ] ; then
             jids="-j $jidd"
           else
@@ -242,7 +242,7 @@ case $fix_mode in
         done
         j=`echo "$j 1 + p" | dc -`
       done
-      jidf=`fsl_sub $jids -q short.q -l $LOO ${FSL_FIXDIR}/call_matlab.sh -f fix_2c_loo_results $LOO`
+      jidf=`fsl_sub $jids -l $LOO ${FSL_FIXDIR}/call_matlab.sh -f fix_2c_loo_results $LOO`
     ;;
     
   3)
