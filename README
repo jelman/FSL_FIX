@@ -1,3 +1,10 @@
+#########################################################################
+This repository contains code fixes in order to run on the cluster. 
+Follow the directions below as well as copying the following directories which are available from the downloadable package on the FSL website (http://fsl.fmrib.ox.ac.uk/fsl/fslwiki/FIX):
+compiled/
+mask_files/
+training_files/
+#########################################################################
 
 -------------------------------------------------------
   FIX - FMRIB's ICA-based Xnoiseifier
