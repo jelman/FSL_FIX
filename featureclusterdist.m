@@ -12,7 +12,7 @@ while 1, counter = counter + 1;
     drow(counter,:) = [counter C{1} C{2} ];
 end; 
 fclose(fid);
-delete(sprintf('%sfix/dummy1*', strFold));
+%delete(sprintf('%sfix/dummy1*', strFold));
 
 % get all the cluster size
 if counter>1    
