@@ -29,12 +29,12 @@ function fix_1a_extract_features(icaFolder)
 	    
 	    % % Start extracting the features for each and every component ...
 	    imagePveSeg = read_avw([icaFolder 'fix/hr2exf']);
-	    call_fsl(sprintf('fslmaths %sfix/hr2exf -thr 1 -uthr 1 -bin %sfix/hr2exfTMP; fslmeants -i %sfiltered_func_data -m %sfix/hr2exfTMP -o %sfix/hr2exfTMP.txt',icaFolder,icaFolder,icaFolder,icaFolder,icaFolder));
-	    meanCsfTimeSeries= load(sprintf('%sfix/hr2exfTMP.txt',icaFolder))';
-	    call_fsl(sprintf('fslmaths %sfix/hr2exf -thr 2 -uthr 2 -bin %sfix/hr2exfTMP; fslmeants -i %sfiltered_func_data -m %sfix/hr2exfTMP -o %sfix/hr2exfTMP.txt',icaFolder,icaFolder,icaFolder,icaFolder,icaFolder));
-	    meanGmTimeSeries= load(sprintf('%sfix/hr2exfTMP.txt',icaFolder))';
-	    call_fsl(sprintf('fslmaths %sfix/hr2exf -thr 3 -uthr 3 -bin %sfix/hr2exfTMP; fslmeants -i %sfiltered_func_data -m %sfix/hr2exfTMP -o %sfix/hr2exfTMP.txt',icaFolder,icaFolder,icaFolder,icaFolder,icaFolder));
-	    meanWmTimeSeries= load(sprintf('%sfix/hr2exfTMP.txt',icaFolder))';
+	    call_fsl(sprintf('fslmaths %sfix/hr2exf -thr 1 -uthr 1 -bin %sfix/hr2exfCSF; fslmeants -i %sfiltered_func_data -m %sfix/hr2exfCSF -o %sfix/hr2exfCSF.txt',icaFolder,icaFolder,icaFolder,icaFolder,icaFolder));
+	    meanCsfTimeSeries= load(sprintf('%sfix/hr2exfCSF.txt',icaFolder))';
+	    call_fsl(sprintf('fslmaths %sfix/hr2exf -thr 2 -uthr 2 -bin %sfix/hr2exfGM; fslmeants -i %sfiltered_func_data -m %sfix/hr2exfGM -o %sfix/hr2exfGM.txt',icaFolder,icaFolder,icaFolder,icaFolder,icaFolder));
+	    meanGmTimeSeries= load(sprintf('%sfix/hr2exfGM.txt',icaFolder))';
+	    call_fsl(sprintf('fslmaths %sfix/hr2exf -thr 3 -uthr 3 -bin %sfix/hr2exfWM; fslmeants -i %sfiltered_func_data -m %sfix/hr2exfWM -o %sfix/hr2exfWM.txt',icaFolder,icaFolder,icaFolder,icaFolder,icaFolder));
+	    meanWmTimeSeries= load(sprintf('%sfix/hr2exfWM.txt',icaFolder))';
 	    % it used to read
 	    %imagePveCsf= read_avw([icaFolder 'fix/hr2exf_csf.nii.gz']);
 	    %imagePveGm = read_avw([icaFolder 'fix/hr2exf_gm.nii.gz']);
@@ -90,6 +90,7 @@ function fix_1a_extract_features(icaFolder)
 	        
 	        % % Spatial features
 	        featureMatrix(globalIcCounter, 047:055) = featureclusterdist(icaFolder, [xRes yRes zRes]);
+	        
 	        featureMatrix(globalIcCounter, 056:061) = featurenegativevspositive(icaFolder);
 	        featureMatrix(globalIcCounter, 062:065) = featurezstattofuncratio(icaFolder);
 	        featureMatrix(globalIcCounter, 066:069) = featureslicewisestats(icaFolder);
