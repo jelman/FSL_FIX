@@ -3,14 +3,18 @@ function feat = featuresmoothest(strFold)
 % spatial entropy (histogram) / parameters from histogram mixture-model fit    
 % smoothness    
 msk = sprintf('%smask',strFold);
-call_fsl(sprintf('echo `smoothest -z %sfix/dummy -m %s` > %sfix/dummy1.txt', strFold, msk, strFold));        
+call_fsl(sprintf('smoothest -z %sfix/dummy -m %s > %sfix/dummy1.txt', strFold, msk, strFold));      
 
 fid = fopen(sprintf('%sfix/dummy1.txt', strFold));
 tline = fgetl(fid);
-C = textscan(tline, '%s %f %s %f %s %f');
+DLH = textscan(tline, '%s %f');
+tline = fgetl(fid);
+VOL = textscan(tline, '%s %f');
+tline = fgetl(fid);
+RESEL = textscan(tline, '%s %f');
 fclose(fid);
 
 % DLH, VOL, RESEL
-feat = C{6};
+feat = RESEL{2};
 delete(sprintf('%sfix/dummy1*', strFold));
 end
