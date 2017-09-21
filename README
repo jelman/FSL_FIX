@@ -68,6 +68,7 @@ or:
         (struct for 3.4)
         (optim for 3.4)
         signal
+        nan
   
   To install these toolboxes, use the script setup_octave.sh - this will ask for a 'sudo' password if
   required (use -g option to install globally rather than for just this user account).
