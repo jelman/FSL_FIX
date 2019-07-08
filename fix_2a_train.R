@@ -91,7 +91,7 @@ calcFScore <- function(hcp.data, feat.id) {
 	n.plus <- length(x.plus)
 	n.minus <- length(x.minus)
 	den.plus <- sum((x.plus-mean(x.plus))^2)/n.plus
-	den.minus <- sum((x.minus-mean(x.plus))^2)/n.minus
+	den.minus <- sum((x.minus-mean(x.minus))^2)/n.minus
 	F.score <- (num.plus+num.minus)/(den.plus+den.minus) # to avois NaN, one can +.Machine$double.eps
 	F.score
 }
